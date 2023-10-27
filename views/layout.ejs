@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Bienvenido a su app web</title>
+        <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="/css/styles.css">
+      </head>
+    <body class="bg-gray-100">
+        <header class="bg-white p-4 flex justify-between items-center">
+          <div class="ml-4">
+            <a href="/">
+              <img src="/img/logo.png" alt="Logo " class="w-30 h-20">
+            </a>
+          </div>
+            <div class="mr-4">
+                <% if (isAuthenticated) { %>
+                  <div class="navbar">
+                    <div class="navbar-toggle" onclick="toggleMenu()">
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                    </div>
+                    <nav class="navbar-links" id="navbarLinks">
+                        <a href="/" class="nav-link">Inicio</a>
+                        <a href="/profile" class="nav-link">Mi Perfil</a>
+                        <a href="/services" class="nav-link">Servicios</a>
+                        <a href="#" class="nav-link" onclick="cerrarSesion()">Cerrar Sesión</a>
+                    </nav>
+                </div>
+                <% } else { %>
+                <a href="/login" class="text-blue-500 hover:text-blue-700">Ingresar</a>
+                <% } %>
+            </div>
+        </header>
+        <div class="items-center mx-auto max-w-6xl">
+          <%- content %><!-- Aquí se incluirá el contenido de cada página -->
+        </div>
+        <footer class="mt-8 p-4 bg-gray-200 text-center">
+            <p class="text-gray-600">Derechos de autor © 2023 Desarrollo web</p>
+        </footer>
+        <script>
+
+            function cerrarSesion() {
+              // Enviar una solicitud POST para cerrar sesión
+              fetch('/logout', {
+                method: 'POST'
+              }).then(response => {
+                // Redirigir a la página de inicio u otra página después de cerrar sesión
+                window.location.href = '/';
+              });
+            }
+
+            function toggleMenu() {
+              const navbar = document.querySelector('.navbar');
+              navbar.classList.toggle('open');
+            }
+
+            const carouselInner = document.querySelector('.carousel-inner');
+            const slides = document.querySelectorAll('.carousel-slide');
+            let currentSlide = 0;
+
+            function showSlide(slideIndex) {
+              if (slideIndex < 0) {
+                  slideIndex = slides.length - 1;
+              } else if (slideIndex >= slides.length) {
+                  slideIndex = 0;
+              }
+
+              if(carouselInner){
+                carouselInner.style.transform = `translateX(-${slideIndex * 100}%)`;
+                currentSlide = slideIndex;
+              }
+            }
+
+            setInterval(() => {
+            showSlide(currentSlide + 1);
+            }, 3000);
+        </script>
+    </body>
+</html>

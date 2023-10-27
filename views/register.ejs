@@ -1,0 +1,42 @@
+<%- include('layout', { content: `
+
+  <div class="min-h-screen flex items-center justify-center">
+    <div class="w-full max-w-md bg-white p-8 rounded-lg shadow-md">
+      <h2 class="text-2xl font-semibold mb-4">Registro</h2>
+      <form action="/register" method="post" class="space-y-4">\
+        <div>
+          <label for="username" class="block font-semibold">Nombre:</label>
+          <input type="text" id="username" name="username" class="w-full border rounded-md p-2">
+        </div>
+        <div>
+          <label for="email" class="block font-semibold">Correo Electrónico:</label>
+          <input type="email" id="email" name="email" class="w-full border rounded-md p-2">
+        </div>
+        <div>
+          <label for="password" class="block font-semibold">Contraseña:</label>
+          <input type="password" id="password" name="password" class="w-full border rounded-md p-2">
+        </div>
+        <div>
+          <label for="confirmPassword" class="block font-semibold">Confirmar Contraseña:</label>
+          <input type="password" id="confirmPassword" name="confirmPassword" class="w-full border rounded-md p-2">
+        </div>
+        <div>
+          <label for="type" class="block font-semibold">Tipo de Usuario:</label>
+          <select id="type" name="type" class="w-full border rounded-md p-2">
+            <option value="user">Usuario</option>
+            <option value="company">Empresa</option>
+          </select>
+        </div>
+        <div>
+          <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md">Registrarse</button>
+        </div>
+      </form>
+      <p class="text-gray-600 mt-4">¿Ya tienes una cuenta? <a href="/login" class="text-blue-500 hover:text-blue-600">Inicia sesión aquí</a></p>
+    </div>
+  </div>
+
+  `,
+  user: null,
+  isAuthenticated: false
+
+  }) %>

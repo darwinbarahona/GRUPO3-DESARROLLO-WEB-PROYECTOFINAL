@@ -1,0 +1,29 @@
+<%- include('layout', { content: `
+  <div class="m-8 p-4">
+    <h2 class="text-2xl font-semibold mb-4">Citas Activas</h2>
+    ${typeof message !== 'undefined' ? `
+    <div>
+      <h3 class="text-2xl font-semibold mb-4 text-green-500">${message}</h3>
+    </div>
+    ` : ''
+   }
+    <ul class="space-y-4">
+      ${appointments.map(appointment => `
+        <li class="bg-white p-4 shadow rounded-md">
+          <p><strong>Título del Servicio:</strong> ${appointment.Service.title}</p>
+          <p><strong>Vehículo:</strong> ${appointment.Vehicle.brand} - ${appointment.Vehicle.model}</p>
+          <p><strong>Fecha:</strong> ${appointment.appointment_date}</p>
+          <p><strong class="${appointment.status === 'completed' ? 'text-green-500' : 'text-blue-500' }">${appointment.status}</strong></p>
+          ${appointment.status === 'pending' && user.type === 'company' ? `
+            <form action="/complete-appointment/${appointment.id}" method="post">
+              <button type="submit" class="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-md">Marcar como Completada</button>
+            </form>
+          ` : ''}
+        </li>
+      `).join('')}
+    </ul>
+  </div>
+  `,
+  user: user,
+  isAuthenticated: isAuthenticated,
+}) %>

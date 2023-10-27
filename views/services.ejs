@@ -1,0 +1,42 @@
+<%- include('layout', { content: `
+  <div class="mt-8 p-4">
+    <div class="flex center">
+      <h2 class="text-2xl font-semibold p-2">Servicios</h2>
+      <a href="/active-appointments" class="mb-4 bg-gray-500 hover:bg-blue-600 text-white font-semibold p-1 rounded-md">Historial</a>
+    </div>
+    ${user.type === 'company' ? `
+      <!-- Botón para agregar servicios -->
+      <div class="mb-4">
+        <a href="/add-service" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md">Agregar Servicio</a>
+      </div>
+      <!-- Listado de servicios registrados -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
+        ${services.map(service => `
+          <div class="bg-white p-4 rounded-lg shadow-md">
+            <h3 class="text-lg font-semibold">${service.title}</h3>
+            <p class="text-gray-600">${service.description}</p>
+            <a href="/update-service/${service.id}" class="text-blue-500 hover:underline">Actualizar</a>
+          </div>
+          `).join('')}
+      </div>
+     ` : `
+      <!-- Listado de servicios disponibles -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
+        ${services.map(service => `
+          <div class="bg-white p-4 rounded-lg shadow-md">
+            <h3 class="text-lg font-semibold">${service.title}</h3>
+            <p class="text-gray-600 py-2">${service.description}</p>
+            <a href="/schedule-appointment/${service.id}" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md">Agendar Cita</a>
+          </div>
+        ` ).join('')}
+      </div>
+      `}
+  </div>
+
+  `,
+  user: user,
+  isAuthenticated: isAuthenticated
+
+  }) %>
+
+

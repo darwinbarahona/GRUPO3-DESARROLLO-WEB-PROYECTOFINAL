@@ -1,0 +1,56 @@
+<%- include('layout', { content: `
+  <div class="m-8 p-4">
+    <h2 class="text-2xl font-semibold mb-4">Mi Perfil</h2>
+    <form action="/profile/${profile.id}" method="post" class="space-y-4">
+      <div>
+        <label for="profileTitle" class="block font-semibold">Actualizar mi Perfil:</label>
+      </div>
+      <div>
+        <label for="cui" class="block font-semibold">CUI (ID):</label>
+        <input type="text" id="cui" name="cui" class="w-full border rounded-md p-2" value="${profile.cui}">
+      </div>
+      <div>
+        <label for="first_name" class="block font-semibold">Nombre:</label>
+        <input type="text" id="first_name" name="first_name" class="w-full border rounded-md p-2" value="${profile.first_name}">
+      </div>
+      <div>
+        <label for="last_name" class="block font-semibold">Apellido:</label>
+        <input type="text" id="last_name" name="last_name" class="w-full border rounded-md p-2" value="${profile.last_name}">
+      </div>
+      <div>
+        <label for="phone" class="block font-semibold">Teléfono:</label>
+        <input type="tel" id="phone" name="phone" class="w-full border rounded-md p-2" value="${profile.phone}">
+      </div>
+      <div>
+        <label for="address" class="block font-semibold">Dirección:</label>
+        <input type="text" id="address" name="address" class="w-full border rounded-md p-2" value="${profile.address}">
+      </div>
+      <div>
+        <label for="nit" class="block font-semibold">NIT:</label>
+        <input type="text" id="nit" name="nit" class="w-full border rounded-md p-2" value="${profile.nit}">
+      </div>
+      <div>
+        <label for="department" class="block font-semibold">Departamento:</label>
+        <input type="text" id="department" name="department" class="w-full border rounded-md p-2" value="${profile.department}">
+      </div>
+      <div>
+        <label for="municipality" class="block font-semibold">Municipio:</label>
+        <input type="text" id="municipality" name="municipality" class="w-full border rounded-md p-2" value="${profile.municipality}">
+      </div>
+      <div class="py-4">
+        <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md">Guardar</button>
+        <button type="button" class="bg-gray-300 hover:bg-gray-400 text-gray-600 font-semibold py-2 px-4 rounded-md ml-2">Cancelar</button>
+      </div>
+    </form>
+    ${user.type === 'user' ? `
+    <div class="mt-4">
+      <a href="/add-vehicle" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md">Agregar Vehículo</a>
+    </div>
+    ` : ''}
+  </div>
+  `,
+  user: user,
+  isAuthenticated: isAuthenticated,
+  profile: profile
+  
+}) %>

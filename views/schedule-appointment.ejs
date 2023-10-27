@@ -1,0 +1,33 @@
+<%- include('layout', { content: `
+  <div class="m-8 p-4">
+    <h2 class="text-2xl font-semibold mb-4">Agendar Cita</h2>
+    <form action="/schedule-appointment" method="post" class="space-y-4">
+      <div>
+        <label for="service_name" class="block font-semibold">Título del Servicio:</label>
+        <input type="text" id="service_name" name="service_name" class="w-full border rounded-md p-2" value="${service.title || '' }" disabled>
+      <div>
+        <input type="text" id="service_id" name="service_id" value="${service.id || '' }" hidden>
+      </div>
+      <div>
+        <label for="vehicle_id" class="block font-semibold">Seleccionar Vehículo:</label>
+        <select id="vehicle_id" name="vehicle_id" class="w-full border rounded-md p-2">
+          <option value="">Seleccione un vehículo</option>
+          ${vehicles.map(vehicle => `
+            <option value="${vehicle.id}">${vehicle.plates} - ${vehicle.brand}</option>
+            `).join('')}
+        </select>
+      </div>
+      <div>
+        <label for="appointment_date" class="block font-semibold">Fecha de la Cita:</label>
+        <input type="date" id="appointment_date" name="appointment_date" class="w-full border rounded-md p-2">
+      </div>
+      <div>
+        <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md">Continuar</button>
+        <button type="button" class="bg-gray-300 hover:bg-gray-400 text-gray-600 font-semibold py-2 px-4 rounded-md ml-2">Cancelar</button>
+      </div>
+    </form>
+  </div>
+  `,
+  user: user,
+  isAuthenticated: isAuthenticated,
+}) %>
